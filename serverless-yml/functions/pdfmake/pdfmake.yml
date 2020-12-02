@@ -1,0 +1,10 @@
+pdfmake-demo:
+  # provisionedConcurrency: 1
+  handler: services/pdfmake/pdfmake.generate
+  layers:
+    - { Ref: PdfkitLambdaLayer }
+  events:
+    - http:
+        path: demo-make
+        method: get
+        cors: true

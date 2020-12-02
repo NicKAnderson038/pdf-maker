@@ -1,0 +1,7 @@
+Pdfkit:
+  name: Pdfkit
+  compatibleRuntimes:
+    - nodejs12.x
+  description: Required for Pdfkit
+  package:
+    artifact: layer/pdfkit-layer.zip

@@ -1,0 +1,22 @@
+region: ${opt:region, self:provider.region}
+myStage: ${opt:stage, self:provider.stage}
+config: ${file(./serverless-yml/serviceConfig.yml)}
+myProfile:
+    dev: default
+    staging: default
+    prod: default
+webpack:
+    webpackConfig: webpack.config.js
+    includeModules:
+      forceExclude:
+        - pdfkit
+    packager: "npm"
+
+serverless-offline:
+    location: .webpack/service
+
+# customDomain:
+#     domainName: labs.nja.com
+#     basePath: pdfkit
+#     stage: ${self:provider.stage}
+#     createRoute53Record: true
