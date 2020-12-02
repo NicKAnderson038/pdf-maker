@@ -6,5 +6,5 @@ pdfmake-demo:
   events:
     - http:
         path: demo-make
-        method: post
+        method: POST
         cors: true

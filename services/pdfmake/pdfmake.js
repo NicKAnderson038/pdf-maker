@@ -39,7 +39,7 @@ const generatePDF = async docDefinition => {
 }
 
 const handler = async (context, req) => {
-	const voucher = context.body
+	const voucher = JSON.parse(context.body)
 	// const voucher = { "vendorName": "Free Voucher", "vendorStreet": "123 South Street", "vendorZipCity": "19103" }
 	let templateStr = JSON.stringify(pdfTemplate)
 

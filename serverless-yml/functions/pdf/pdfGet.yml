@@ -1,10 +1,10 @@
-pdfkit-demo:
+pdfkit-demo-get:
   # provisionedConcurrency: 1
-  handler: services/pdf/pdf.generate
+  handler: services/pdf/pdfGet.generate
   layers:
     - { Ref: PdfkitLambdaLayer }
   events:
     - http:
-        path: demo
-        method: POST
+        path: demo-get
+        method: GET
         cors: true

@@ -11,17 +11,17 @@ module.exports =
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ "./services/pdf/pdf.js":
-/*!*****************************!*\
-  !*** ./services/pdf/pdf.js ***!
-  \*****************************/
+/***/ "./services/pdf/pdfGet.js":
+/*!********************************!*\
+  !*** ./services/pdf/pdfGet.js ***!
+  \********************************/
 /*! namespace exports */
-/*! export generate [provided] [maybe used in services/pdf/pdf (runtime-defined)] [usage prevents renaming] */
-/*! other exports [not provided] [maybe used in services/pdf/pdf (runtime-defined)] */
+/*! export generate [provided] [maybe used in services/pdf/pdfGet (runtime-defined)] [usage prevents renaming] */
+/*! other exports [not provided] [maybe used in services/pdf/pdfGet (runtime-defined)] */
 /*! runtime requirements: __webpack_require__, __webpack_require__.n, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"generate\": () => /* binding */ generate\n/* harmony export */ });\n/* harmony import */ var pdfkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pdfkit */ \"pdfkit\");\n/* harmony import */ var pdfkit__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pdfkit__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _middy_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @middy/core */ \"@middy/core\");\n/* harmony import */ var _middy_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_middy_core__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _middy_do_not_wait_for_empty_event_loop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @middy/do-not-wait-for-empty-event-loop */ \"@middy/do-not-wait-for-empty-event-loop\");\n/* harmony import */ var _middy_do_not_wait_for_empty_event_loop__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_middy_do_not_wait_for_empty_event_loop__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nconst generatePdf = async ({text = \"Test Data\"}) => {\n\treturn new Promise((resolve, reject) => {\n\t\tconsole.log(text)\n\t\tconst doc = new (pdfkit__WEBPACK_IMPORTED_MODULE_0___default())()\n\t\tdoc.text(text)\n\t\tdoc.end()\n\t\tconst buffers = []\n\t\tdoc.on('data', buffers.push.bind(buffers))\n\t\tdoc.on('end', () => {\n\t\t\tconst pdfData = Buffer.concat(buffers)\n\t\t\tresolve(pdfData)\n\t\t})\n\t})\n}\nconst handler = async (context, event) => {\n\tconst data = JSON.parse(context.body)\n\tconst stream = await generatePdf(data)\n\treturn {\n\t\tstatusCode: 200,\n\t\tisBase64Encoded: true,\n\t\theaders: {\n\t\t\t'Content-type': 'application/pdf',\n\t\t},\n\t\tbody: stream.toString('base64'),\n\t}\n}\n\nconst generate = _middy_core__WEBPACK_IMPORTED_MODULE_1___default()(handler).use(_middy_do_not_wait_for_empty_event_loop__WEBPACK_IMPORTED_MODULE_2___default()())\n\n\n//# sourceURL=webpack://pdf-maker/./services/pdf/pdf.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"generate\": () => /* binding */ generate\n/* harmony export */ });\n/* harmony import */ var pdfkit__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! pdfkit */ \"pdfkit\");\n/* harmony import */ var pdfkit__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(pdfkit__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _middy_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @middy/core */ \"@middy/core\");\n/* harmony import */ var _middy_core__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_middy_core__WEBPACK_IMPORTED_MODULE_1__);\n/* harmony import */ var _middy_do_not_wait_for_empty_event_loop__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @middy/do-not-wait-for-empty-event-loop */ \"@middy/do-not-wait-for-empty-event-loop\");\n/* harmony import */ var _middy_do_not_wait_for_empty_event_loop__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_middy_do_not_wait_for_empty_event_loop__WEBPACK_IMPORTED_MODULE_2__);\n\n\n\n\nconst generatePdf = async () => {\n\treturn new Promise((resolve, reject) => {\n\t\tconst doc = new (pdfkit__WEBPACK_IMPORTED_MODULE_0___default())()\n\t\tdoc.text(\"Test Data\")\n\t\tdoc.end()\n\t\tconst buffers = []\n\t\tdoc.on('data', buffers.push.bind(buffers))\n\t\tdoc.on('end', () => {\n\t\t\tconst pdfData = Buffer.concat(buffers)\n\t\t\tresolve(pdfData)\n\t\t})\n\t})\n}\nconst handler = async (context, event) => {\n\tconst stream = await generatePdf()\n\treturn {\n\t\tstatusCode: 200,\n\t\tisBase64Encoded: true,\n\t\theaders: {\n\t\t\t'Content-type': 'application/pdf',\n\t\t},\n\t\tbody: stream.toString('base64'),\n\t}\n}\n\nconst generate = _middy_core__WEBPACK_IMPORTED_MODULE_1___default()(handler).use(_middy_do_not_wait_for_empty_event_loop__WEBPACK_IMPORTED_MODULE_2___default()())\n\n\n//# sourceURL=webpack://pdf-maker/./services/pdf/pdfGet.js?");
 
 /***/ }),
 
@@ -137,6 +137,6 @@ eval("module.exports = require(\"pdfkit\");;\n\n//# sourceURL=webpack://pdf-make
 /******/ 	// module exports must be returned from runtime so entry inlining is disabled
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__("./services/pdf/pdf.js");
+/******/ 	return __webpack_require__("./services/pdf/pdfGet.js");
 /******/ })()
 ;

@@ -2,11 +2,10 @@ import PDFDocument from 'pdfkit'
 import middy from '@middy/core'
 import doNotWaitForEmptyEventLoop from '@middy/do-not-wait-for-empty-event-loop'
 
-const generatePdf = async ({text = "Test Data"}) => {
+const generatePdf = async () => {
 	return new Promise((resolve, reject) => {
-		console.log(text)
 		const doc = new PDFDocument()
-		doc.text(text)
+		doc.text("Test Data")
 		doc.end()
 		const buffers = []
 		doc.on('data', buffers.push.bind(buffers))
@@ -17,8 +16,7 @@ const generatePdf = async ({text = "Test Data"}) => {
 	})
 }
 const handler = async (context, event) => {
-	const data = JSON.parse(context.body)
-	const stream = await generatePdf(data)
+	const stream = await generatePdf()
 	return {
 		statusCode: 200,
 		isBase64Encoded: true,
