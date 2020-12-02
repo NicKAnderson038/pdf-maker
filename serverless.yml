@@ -18,6 +18,10 @@ plugins:
   - serverless-plugin-common-excludes
   - serverless-plugin-include-dependencies
 
+package:
+  include:
+    - fonts/**
+
 layers: ${file(./serverless-yml/layers.yml)}
 custom: ${file(./serverless-yml/custom.yml)}
 
