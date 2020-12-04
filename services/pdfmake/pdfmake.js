@@ -16,8 +16,6 @@ const generatePDF = async docDefinition => {
 			bolditalics: pdfFonts.pdfMake.vfs['Roboto-MediumItalic.ttf'],
 		},
 	}
-	// const printer = new pdfMakePrinter(fontDescriptors)
-	// const doc = printer.createPdfKitDocument(docDefinition)
 
 	return new Promise(resolve => {
 		const printer = new pdfMakePrinter(fontDescriptors)
@@ -56,6 +54,9 @@ const handler = async (context, req) => {
 		statusCode: 200,
 		isBase64Encoded: true,
 		headers: {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Credentials': true,
+			'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
 			'Content-type': 'application/pdf',
 		},
 		body: stream.toString('base64'),

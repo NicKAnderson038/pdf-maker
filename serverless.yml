@@ -7,6 +7,7 @@ provider:
   name: aws
   runtime: nodejs12.x
   profile: pdfapiservice
+  environment: ${file(./serverless-yml/environment.yml)}
   apiGateway:
     binaryMediaTypes:
       - "application/pdf"

@@ -1,0 +1,11 @@
+pdfkit-demo-to-s3:
+  # provisionedConcurrency: 1
+  handler: services/pdf/pdfBuildToS3.generate
+  layers:
+    - { Ref: PdfkitLambdaLayer }
+  events:
+    - http:
+        path: demo-to-s3
+        method: POST
+        cors: true
+        # integration: lambda-proxy

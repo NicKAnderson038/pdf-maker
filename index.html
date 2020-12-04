@@ -274,6 +274,66 @@
 	</head>
 	<body>
 		<script>
+			function myFunctionS3() {
+				const pdfUrl = 'http://localhost:3000/dev/dev/demo-to-s3'
+				fetch(pdfUrl, {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify({
+						vendorName: 'Free Voucher',
+						vendorStreet: '123 South Street',
+						vendorZipCity: '19103',
+					}),
+				})
+					.then(response => response.text())
+					.then(body => {
+						console.log(body)
+						// console.log(body.Location)
+						openBase64NewTab(body)
+						function openBase64NewTab(base64Pdf) {
+							var blob = base64toBlob(base64Pdf)
+							if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+								window.navigator.msSaveOrOpenBlob(blob, 'pdfBase64.pdf')
+							} else {
+								const blobUrl = URL.createObjectURL(blob)
+								// window.open(blobUrl)
+								var link = document.createElement('a')
+								link.href = blobUrl
+								link.download = 'file.pdf'
+								link.click()
+								// setTimeout(() => {
+								// 	// For Firefox it is necessary to delay revoking the ObjectURL
+								// 	URL.revokeObjectURL(data)
+								// }, 100)
+							}
+						}
+
+						function base64toBlob(byteCharacters) {
+							const sliceSize = 1024
+							const bytesLength = byteCharacters.length
+							const slicesCount = Math.ceil(bytesLength / sliceSize)
+							const byteArrays = new Array(slicesCount)
+
+							for (let sliceIndex = 0; sliceIndex < slicesCount; ++sliceIndex) {
+								const begin = sliceIndex * sliceSize
+								const end = Math.min(begin + sliceSize, bytesLength)
+
+								const bytes = new Array(end - begin)
+								for (let offset = begin, i = 0; offset < end; ++i, ++offset) {
+									bytes[i] = byteCharacters[offset].charCodeAt(0)
+								}
+								byteArrays[sliceIndex] = new Uint8Array(bytes)
+							}
+							return new Blob(byteArrays, { type: 'application/pdf' })
+						}
+
+						return
+					})
+					.catch(err => console.error(err))
+			}
+
 			function myFunction1() {
 				const pdfUrl = 'http://localhost:3000/dev/dev/demo-get'
 				fetch(pdfUrl)
@@ -368,6 +428,9 @@
 					.catch(err => console.error(err))
 			}
 		</script>
+		<button class="btn second" onclick="myFunctionS3()">
+			PDF KIT-S3: POST
+		</button>
 		<button class="btn third" onclick="myFunction1()">PDF KIT: GET</button>
 		<button class="btn fourth" onclick="myFunction2()">PDF KIT: POST</button>
 		<button class="btn fifth" onclick="myFunction3()">PDF MAKE: POST</button>
