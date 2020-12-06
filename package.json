@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "prettier:format": "echo \"🚦 START 👉 Prettier❗\" && prettier --write services/** && echo \"🏁 END 👉 Prettier❗\"",
-    "serverless": "sls offline start --port 3003 --stage dev --basePath / --prefix dev --location .webpack/service"
+    "serverless": "sls offline start --port 3003 --stage dev --basePath / --prefix dev --location .webpack/service",
+    "bucket-builder": "aws s3api create-bucket --bucket pdf-storage --region us-east-1",
+    "sls:offline": "npx sls offline $npm_package_config_dev",
+		"sls:deploy": "bash ci-deploy.sh"
   },
   "config": {
     "dev": "--stage dev --region us-east-1 --verbose --aws-profile default"

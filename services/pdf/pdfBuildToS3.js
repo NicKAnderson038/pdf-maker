@@ -1,6 +1,8 @@
 import PDFDocument from 'pdfkit'
 import middy from '@middy/core'
 import doNotWaitForEmptyEventLoop from '@middy/do-not-wait-for-empty-event-loop'
+import { randomBytes } from 'crypto'
+// const randomBytes = require('crypto').randomBytes
 
 const generatePdf = async ({ vendorName = 'Test Data' }) => {
 	return new Promise((resolve, reject) => {
@@ -8,6 +10,7 @@ const generatePdf = async ({ vendorName = 'Test Data' }) => {
 		const doc = new PDFDocument()
 		doc.text(vendorName)
 		doc.end()
+		console.log(doc)
 		const buffers = []
 		doc.on('data', buffers.push.bind(buffers))
 		doc.on('end', () => {
@@ -17,21 +20,22 @@ const generatePdf = async ({ vendorName = 'Test Data' }) => {
 	})
 }
 console.log(process.env.BUCKET_NAME)
+console.log(randomBytes(16).toString('hex'))
 
 const handler = async (context, event) => {
 	const data = JSON.parse(context.body)
-	const stream = await generatePdf(data)
-	return {
-		statusCode: 200,
-		isBase64Encoded: true,
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Access-Control-Allow-Credentials': true,
-			'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
-			'Content-type': 'application/pdf',
-		},
-		body: stream.toString('base64'),
-	}
+	// const stream = await generatePdf(data)
+	// return {
+	// 	statusCode: 200,
+	// 	isBase64Encoded: true,
+	// 	headers: {
+	// 		'Access-Control-Allow-Origin': '*',
+	// 		'Access-Control-Allow-Credentials': true,
+	// 		'Access-Control-Allow-Methods': 'GET,HEAD,OPTIONS,POST,PUT',
+	// 		'Content-type': 'application/pdf',
+	// 	},
+	// 	body: stream.toString('base64'),
+	// }
 	// return {
 	// 	statusCode: 200,
 	// 	// headers
