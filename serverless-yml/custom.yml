@@ -5,15 +5,7 @@ myProfile:
     dev: default
     staging: default
     prod: default
-webpack:
-    webpackConfig: webpack.config.js
-    includeModules:
-      forceExclude:
-        - pdfkit
-    packager: "npm"
-
-serverless-offline:
-    location: .webpack/service
+bucketName: myserverlessprojectuploadbucket-8787872
 
 # customDomain:
 #     domainName: labs.nja.com
